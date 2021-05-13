@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
-//import { BsModalService, BsModalRef } from 'ngx-bootstrap/__ivy_ngcc__/modal';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-user-management',
@@ -11,9 +11,9 @@ import { AdminService } from 'src/app/_services/admin.service';
 })
 export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
-  //bsModalRef: BsModalRef;
+  bsModalRef: BsModalRef;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles();
@@ -25,20 +25,59 @@ export class UserManagementComponent implements OnInit {
     })
   }
 
-  openRolesModal() {
+  openRolesModal(user: any) {
 
-    // const initialState = {
-    //   list: [
-    //     'Open a modal with component',
-    //     'Pass your data',
-    //     'Do something else',
-    //     '...'
-    //   ],
-    //   title: 'Modal with component'
-    // };
-    // this.bsModalRef = this.modalService.show(RolesModalComponent, {initialState});
-    // this.bsModalRef.content.closeBtnName = 'Close';
-  
+    const config = {
+      class: 'modal-dialog-centered',
+      initialState: {
+        user,
+        roles: this.getRolesArray(user)
+      }
+    }
+    this.bsModalRef = this.modalService.show(RolesModalComponent, config);
+    this.bsModalRef.content.updateSelectedRoles.subscribe(values => {
+      const rolesToUdate = {
+        roles: [...values.filter(el => el.checked === true).map(el => el.name)]
+      };
+
+      if(rolesToUdate) {
+        this.adminService.updateUserRoles(user.userName, rolesToUdate.roles).subscribe(() => {
+          user.roles = [...rolesToUdate.roles];
+        })
+      }
+    })
+    //this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  private getRolesArray(user) {
+    const roles = [];
+    const userRoles = user.roles;
+    const availableRoles : any[] = [
+      {name: 'Admin', value: 'Admin'},
+      {name: 'Moderator', value: 'Moderator'},
+      {name: 'Member', value: 'Member'}
+    ];
+
+    availableRoles.forEach(role => {
+      let isMatch = false;
+      for(const userRole of userRoles) {
+        if(role.name === userRole) 
+        {
+          isMatch = true;
+          role.checked = true;
+          roles.push(role);
+          break;
+        }
+      }
+
+      if(!isMatch) {
+        role.checked = false;
+        roles.push(role);
+      }
+    })
+
+    return roles;
+
 
   }
 

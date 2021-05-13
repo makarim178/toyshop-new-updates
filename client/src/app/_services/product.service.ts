@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { pipeFromArray } from 'rxjs/internal/util/pipe';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PaginatedResult } from '../_models/pagination';

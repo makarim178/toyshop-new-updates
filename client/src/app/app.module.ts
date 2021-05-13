@@ -48,7 +48,7 @@ import { OrderCompleteComponent } from './checkout/order-complete/order-complete
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { UserPanelComponent } from './admin/user-panel/user-panel.component';
-//import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 
 @NgModule({
@@ -91,7 +91,7 @@ import { UserPanelComponent } from './admin/user-panel/user-panel.component';
     HasRoleDirective,
     UserManagementComponent,
     UserPanelComponent,
-    //RolesModalComponent,
+    RolesModalComponent,
   ],
   imports: [
     BrowserModule,

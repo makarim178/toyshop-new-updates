@@ -22,7 +22,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     FileUploadModule,
     PaginationModule.forRoot(),
-    //ModalModule.forRoot()
+    ModalModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -31,7 +31,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule,
     FileUploadModule,
     PaginationModule,
-    //ModalModule
+    ModalModule
   ]
 })
 export class SharedModule { }
