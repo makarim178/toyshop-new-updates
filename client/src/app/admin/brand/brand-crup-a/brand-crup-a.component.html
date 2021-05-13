@@ -1,0 +1,29 @@
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Brand Name: </label>
+    <div class="col-sm-6">
+        <ng-container *ngIf="forInsert">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="brandname"
+                [(ngModel)]="brandname"
+                placeholder="Enter Brand Name">
+        </ng-container>
+        <ng-container *ngIf="!forInsert">
+            <label class="text-muted font-weight-bolder">Dummy Brand Name</label>
+        </ng-container>
+    </div>
+    <div class="col-sm-3">
+        <i class="fa fa-save navlinker text-primary" (click)="crup()"></i>
+        <i class="fa fa-times navlinker text-danger ml-3 " (click)="cancelEventFromChild()"></i>
+    </div>
+    <!-- <label class="col-sm-2 col-form-label">Quantity</label>
+    <div class="col-sm-4">
+        <input 
+            type="number" 
+            class="form-control" 
+            name="availableQty"
+            [(ngModel)]="model.availableQty"
+            placeholder="Quantity">
+    </div> -->
+</div>

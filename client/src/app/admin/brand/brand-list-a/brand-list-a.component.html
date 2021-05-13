@@ -1,0 +1,22 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#id</th>
+        <th scope="col">Brand Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brands">
+        <td> {{brand.id}} </td>
+        <td> {{brand.brandName}}</td>
+        <td>
+            
+            <i class="fa fa-edit text-primary pr-4 navLinker" (click)="updateProduct(brand)" ></i>
+            
+            <i class="fa fa-trash text-danger navLinker" (click)="removeBrand(brand.id)" ></i>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>

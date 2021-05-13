@@ -1,0 +1,9 @@
+.navlogo {
+    height: 60px;
+    width: auto;
+}
+.navLinker {
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+

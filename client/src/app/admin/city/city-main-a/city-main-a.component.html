@@ -1,0 +1,52 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col col-10 text-center ml-5-5">
+            <h4 class="h3 text-primary font-weight-bold">
+                Cities
+            </h4>
+
+            <small class="text-muted">Add, Edit or Delete City</small>
+        </div>
+        <div class="col col-2">
+            <a class="text-success font-weight-bold" routerLink="/" >&lt;&lt;&lt; Go Back</a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h4 class="text-info pl-5 ">City List</h4>
+        </div>
+        <div class="col d-flex justify-content-end pr-5">
+            <a class="btn btn-primary btn-md " (click)="click_addNew()"> 
+                Add New City
+                <i class="fa fa-plus-square "></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-2">
+<div class="row">
+        <div class="col col-md-6">
+            <div class="m-2  border rounded">
+                <div class="m-3 border rounded">
+                    <app-city-list-a (editEmitter)="loadUpdate($event)" (deleteEmitter)="cancelForm($event)" [cities]="allcities"></app-city-list-a>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <ng-container *ngIf="(formFor !== 'none')">
+                <div class="m-2 border rounded">
+                    <div class="m-3">
+                        <app-city-crup-a (childEvent)="cancelForm($event)" [Id]="id" [cityname]="cityname" [forInsert] = true [fr]="formFor" ></app-city-crup-a>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    
+</div>

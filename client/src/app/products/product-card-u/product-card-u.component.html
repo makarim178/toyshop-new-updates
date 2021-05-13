@@ -1,0 +1,61 @@
+<div class="col-mb-3 pb-3">
+    <div class="card">
+        <img class="card-img-top card-img" src="{{product.photoUrl || '../../../assets/user.png'}}" alt="Card image cap">
+        
+        <div class="card-footer">
+            <div class="card-title" *ngIf="product" >
+                <span class="font-weight-bolder">
+                    Product Code:{{product.skn}}
+                </span>
+              <p class="card-text">{{product.productName | slice: 0:25}} ...</p>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <small>Price: <strong> {{product.productPrice | currency: 'CAD'}} </strong> </small>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a class="fa fa-eye text-primary border-0 rounded card-linkers pr-2" routerLink="/product/{{product.id}}"></a>
+                    <a class="fa fa-minus-square text-warning border-0 rounded card-linkers pr-2" (click)="removeFromCart(product.id)" ></a>
+                    <a class="fa fa-cart-plus text-success border-0 rounded card-linkers" (click)="addToCart(product)"></a>
+                </div>
+
+            </div>
+            <div class="text-center">
+                <small class="text-primary font-weight-bold freeText pt-3">Free Shipping when you spend $35 and more</small>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+
+
+<!-- <div class="card mb-3">
+    <img src="{{product.photoUrl || '../../../assets/user.png'}}" alt="product.productName" class="card-img-top img-fluid">
+
+    <div class="card-body">
+        <h5 class="font-weight-bold text-small"> 
+            <small class="text-muted">
+                {{product.productName | slice: 0:25}} ...
+            </small>
+        </h5>
+        <p class="font-weight-bold float-left pl-3 pt-2"> <small>
+            Price: <strong>
+                {{product.productPrice | currency: 'CAD'}}
+            </strong> 
+        </small> 
+        </p>
+        <div class="clear-fix">
+        </div>
+            <p class="card-text font-weight-bold float-right pr-3 pt-2">
+                <a class="fa fa-eye text-primary border-0 rounded card-linkers pr-2" routerLink="/product/{{product.id}}"></a>
+                <a class="fa fa-minus-square text-warning border-0 rounded card-linkers pr-2" (click)="removeFromCart(product.id)" ></a>
+                <a class="fa fa-cart-plus text-success border-0 rounded card-linkers" (click)="addToCart(product)"></a>
+            </p>
+        <div class="clear-fix"></div>
+        <div class="text-center" >
+            <p class="text-primary">Free Shipping when you spend $35 and more</p>
+        </div>
+    </div>
+</div> -->

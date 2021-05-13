@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="text-center">
+        <h4 class="text-primary font-weight-bold">Welcome to Checkout</h4>
+        <small class="text-warning navlinker">
+            <i class="fa fa-arrow-left text-warning font-weight-bold pl-3 pr-1" routerLink="/"></i>
+            Continue Shopping
+        </small>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="p-2">
+                <div class="border rounded">
+                    <div class="bg-light">
+                        <h6 class="pt-3 pl-3 pb-3">Contact/Shipping Details</h6>
+                    </div>
+                    <form #addForm="ngForm" (ngSubmit)="onSubmitForm()">
+                        <input type="text" name="appUserId"[(ngModel)]="model.appUserId" hidden class="form-control">
+
+                        <div class="form-group row p-2">
+                            
+                            <div class="col-sm-6 mb-2">
+                                <input [required] type="text" name="firstName" class="form-control" [(ngModel)]="model.firstName" placeholder="Enter First Name">
+                            </div>
+                            <div class="col-sm-6">
+                                <input [required] type="text" name="lastName" class="form-control" [(ngModel)]="model.lastName" placeholder="Enter Last Name">
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <input [required] type="text" name="emailAddress" class="form-control" [(ngModel)]="model.emailAddress" placeholder="Enter Email Address">
+                            </div>
+                            <div class="col-sm-6">
+                                <input [required] type="number" name="phoneNumber" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Enter PhoneNumber Number">
+                            </div>
+                            
+                            <div class="col-sm-12 mb-2">
+                                <input type="text" name="street" class="form-control" [(ngModel)]="model.street" placeholder="Enter Street No/Name">
+                            </div>
+                            
+                            <div class="col-sm-6 mb-2">
+                                <select name="city" class="form-control" [(ngModel)]="selectedDrpDowns.city">
+                                    <option value="0">Please Select City</option>
+                                    <option *ngFor="let city of cities" [value]="city.cityname">{{city.cityname}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <select name="province" class="form-control" [(ngModel)]="selectedDrpDowns.provice">
+                                    <option value="0">Please Select Province</option>
+                                    <option *ngFor="let province of provinces" [value]="province.provincename">{{province.provincename}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <input [required] type="text" name="postalCode" class="form-control" [(ngModel)]="model.postalCode" placeholder="Enter postalCode" maxlength="6">
+                            </div>
+                            <div class="col-sm-6 ">
+                                <select name="country" class="form-control" [(ngModel)]="selectedDrpDowns.country">
+                                    <option value="0">Please Select Country</option>
+                                    <option *ngFor="let country of countries" [value]="country.countryname">{{country.countryname}}</option>
+                                </select>
+                            </div>
+    
+                            <div class="col-sm-6 mb-2">
+                                <button [disabled]="openPayment" class="btn btn-secondary btn-block" type="reset">Reset</button>    
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <button [disabled]="openPayment"  class="btn btn-primary btn-block" type="submit">Submit</button>    
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <app-cart-summary></app-cart-summary>
+
+            <ng-container *ngIf="openPayment">
+                <ngx-braintree
+                    [clientTokenURL]="'https://localhost:5001/api/orders/getclientToken'"
+                    [createPurchaseURL]="'https://localhost:5001/api/orders/verifypayment'"
+                    [chargeAmount]="EstTot"
+                    (paymentStatus)="onpayment($event)">
+                </ngx-braintree>
+
+            </ng-container>
+        </div>
+    </div>
+
+</div>

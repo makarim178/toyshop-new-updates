@@ -1,0 +1,125 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col col-md-3">
+            <div class="border rounded p-3">
+                <div class="card">
+                    <img class="card-img-top card-img" src="{{product.photoUrl || '../../../../../../assets/user.png'}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title" *ngIf="product" >{{product.skn}}</h5>
+                      <p class="card-text">{{product.productName | slice:0:30}} ...</p>
+                      <br>
+                
+                      <small>Available Quantity: <strong> {{product.availableQty}} </strong> </small>
+                      <br>
+                
+                      <small>Last Stock Updated: <br> <strong> {{product.lastUpdatedDate | date: 'medium'}} </strong> </small>
+                      <br>
+                      <small>First Added: <strong>{{product.productCreatedDate | date}}</strong>  </small>
+                      
+                    </div>
+
+                    <div class="card-footer">
+                        <button form="prodForm" class="btn btn-success btn-block" [disabled]="!prodForm.dirty" >{{(forUpdate) ? "Save Changes" : "Add this Product"}}</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <div class="col col-md-9">
+            <div class="border rounded p-2" >
+                <tabset class="product-tabset">
+                    <tab heading='Product Information'>
+                        <div class="alert alert-info m-3" *ngIf="prodForm.dirty">
+                            <strong class="text-danger">Information: </strong> 
+                            <span class="text-danger">
+                                You have made changes. Any unsaved changes will be lost
+                            </span> 
+                        </div>
+                        <form #prodForm="ngForm" id="prodForm" (ngSubmit)="saveChanges()" >
+                        <div class="form-group row p-4">
+                            <ng-container *ngIf="!product">
+                                <div class="col-sm-12" *ngIf="!product">
+                                    <input name="id" [(ngModel)]="product.id">
+                                </div>
+                            </ng-container>
+                            <div class="col-sm-4">
+                                <label for="skn">Skn</label>
+                                <input type="text" [(ngModel)]="product.skn" class="form-control" name="skn" >
+                            </div>
+                            <div class="col-sm-8">
+                                <label for="productName">Product Name</label>
+                                <input type="text" [(ngModel)]="product.productName" name="productName" class="form-control">
+                            </div>
+
+                            <div class="col-sm-12 pt-2">
+                                <label for="productDesc">Product Description</label>
+                                <textarea 
+                                    rows="6" 
+                                    [(ngModel)]="product.productDesc"
+                                    name="productDesc" 
+                                    class="form-control" 
+                                    placeholder="Please enter Product Description..."></textarea>
+                            </div>
+
+                            <div class="col-sm-6 mt-2">
+                                <label for="category">Category</label>
+                                <select name="category" [(ngModel)]="selectedCat" (ngModelChange)="onChangeCategory($event)"  class="form-control">
+                                    <option value="0">Select Category</option>
+                                    <option *ngFor="let category of categories" [value]="category.id" >{{category.categoryName}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-6 mt-2">
+                                <label for="brand">Brand</label>
+                                <!-- <select [(ngModel)]="searchType" (ngModelChange)="onChangeSearchType($event)" class="form-control"> -->
+                                <select name="brand" [(ngModel)]="selectedBrand" (ngModelChange)="onChangeBrand($event)" class="form-control">
+                                    <option value="0">Select Brand</option>
+                                    <option *ngFor="let brand of brands" [value]="brand.id" >{{brand.brandName}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-6 mt-2">
+                                <label for="recMinAge" >Recommended Minimum Age</label>
+                                <input type="number" [(ngModel)]="product.recommendedMinimumAge" name="recommendedMinimumAge" class="form-control" placeholder="Enter recommended minimum age">
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <label for="recGender" >Recommended Gender For Product</label>
+                                <select [(ngModel)]="selectedGender" (ngModelChange)="onChangeGender($event)" class="form-control" name="recGender">
+                                    <option value="0">For All</option>
+                                    <option value="1">Boys</option>
+                                    <option value="2">Girls</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4 mt-2">
+                                <label for="prodPrice" >Product Price</label>
+                                <input [(ngModel)]="product.productPrice" type="number" name="productPrice" class="form-control" placeholder="Enter Product Price">
+                            </div>
+                            <div class="col-sm-4 mt-2">
+                                <label for="prodAvailableQty" >Available Quantity</label>
+                                <input [(ngModel)]="product.availableQty" type="number" name="availableQty" class="form-control" placeholder="Enter Stock">
+                            </div>
+                            <div class="col-sm-4 mt-2">
+                                <label for="minOrderQty" >Minimum Order Quantity</label>
+                                <input [(ngModel)]="product.minOrderQty" type="number" name="minOrderQty" class="form-control" placeholder="Enter minimum Order Quantity">
+                            </div>
+
+                            
+                        </div>
+
+                    </form>
+                        
+                    </tab>
+                    <tab heading='Photo'>
+                        <div class="border rounded p-2">
+                            <app-prod-photo-editor-a ></app-prod-photo-editor-a>
+                        </div>
+                    </tab>
+                    <tab heading='Statistics'>
+                        <h4>Product Statistics will come here... </h4>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

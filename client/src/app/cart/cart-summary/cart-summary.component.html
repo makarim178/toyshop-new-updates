@@ -1,0 +1,64 @@
+<div class="pt-2">
+    <div class="border rounded">
+        <div class="bg-light">
+            <h6 class="pt-3 pb-3 pl-4 text-dark">Order Summary</h6>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-6 text-left">
+                <small class="pl-3 font-weight-bold text-dark">SubTotal: </small>
+            </div>
+            <div class="col-6 text-right">
+                <small class="pr-3 font-weight-bold text-dark">{{SubTotal | currency: 'CAD'}} </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 text-left">
+                <small class="pl-3 font-weight-light text-secondary">Est. Shipping: </small>
+            </div>
+            <div class="col-6 text-right">
+                <small class="pr-3 font-weight-light text-secondary">{{ 5.99 | currency: 'CAD'}} </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 text-left">
+                <small class="pl-3 font-weight-light text-secondary">Shipping Discount: </small>
+            </div>
+            <div class="col-6 text-right">
+                <small class="pr-3 font-weight-light text-secondary">{{ (SubTotal < 36) ? 5.99 : -5.99 | currency: 'CAD'}} </small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-left">
+                <small class="pl-3 font-weight-light text-secondary">  HST : </small>
+            </div>
+            <div class="col-6 text-right">
+                <small class="pr-3 font-weight-light text-secondary">{{ estTax | currency: 'CAD'}} </small>
+            </div>
+        </div>
+        
+        <div class="dropdown-divider m-2"></div>
+
+        <div class="row mb-3">
+            <div class="col-6 text-left">
+                <small class="pl-3 font-weight-bold text-dark">EST. TOTAL: </small>
+            </div>
+            <div class="col-6 text-right">
+                <small class="pr-3 font-weight-bold text-dark">{{EstTot | currency: 'CAD'}} </small>
+            </div>
+        </div>
+
+        <p class="text-primary font-weight-bold text-left pl-3 freeText">Free Shipping when you spend CA$ 35 and more...</p>
+
+        <div class="form-group p-3">
+            <button class="btn btn-primary btn-block" (click)="procToCheckOut()">Proceed To Checkout</button>
+        </div>
+
+
+
+
+    </div>
+
+</div>

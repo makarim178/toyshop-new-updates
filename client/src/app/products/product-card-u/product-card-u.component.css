@@ -1,0 +1,30 @@
+ /* .card{
+    width: 150px;
+    height: auto;
+    margin: 20px;
+    border: 2px solid #f4f4f4;
+} 
+.card-body{
+    background-color: #f4f4f4;
+}
+
+.card-title{
+    font-size: 1em;
+}
+
+.notifyTxt{
+    font-size: 0.75em;
+} */
+
+.card-linkers {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.freeText {
+    font-size: 8pt;
+}

@@ -1,0 +1,22 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#id</th>
+        <th scope="col">Category Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td> {{category.id}} </td>
+        <td> {{category.categoryName}}</td>
+        <td>
+            
+            <i class="fa fa-edit text-primary pr-4 navLinker" (click)="update(category)" ></i>
+            
+            <i class="fa fa-trash text-danger navLinker" (click)="remove(category.id)" ></i>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>

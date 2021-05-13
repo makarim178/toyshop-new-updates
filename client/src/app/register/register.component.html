@@ -1,0 +1,81 @@
+<div class="container">
+    
+    <h3 class="text-center p-4">Welcome to User Registration</h3>
+    <div class="row">
+        <div class="col-6 p-2 card ">
+            <div class="card-body">
+                <p class="text-sm-start text-primary m-3" style="font-weight: bold;">User Registration</p>
+                
+                <!-- Login Form -->
+
+                <form #loginForm="ngForm" class="ml-3 pr-3" (ngSubmit)="Register()" autocomplete="off" >
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Username</label>
+                      <input 
+                        type="text" 
+                        class="form-control" 
+                        name="username" 
+                        [(ngModel)]="model.username"
+                        placeholder="Please enter Username">  
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input 
+                        type="password" 
+                        class="form-control" 
+                        name="password" 
+                        [(ngModel)]="model.password"
+                        placeholder="Please Enter password">
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Confirm Password</label>
+                      <input 
+                        type="password" 
+                        class="form-control" 
+                        name="password" 
+                        [(ngModel)]="model.confirmPassword"
+                        placeholder="Please Enter password">
+                    </div>
+                    <div class="mb-3 form-check container">
+                        <input type="checkbox" class="form-check-input" name="checkTerms" [(ngModel)]="model.checkTerms" id="checkRem">
+                        <label class="form-check-label" for="checkRem">I confirm that I I read and agree with <a class="text-primary">Terms & Condition</a> </label>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block mb-3">Register</button>
+                </form>
+                <!-- Login Form -->
+
+            </div>
+        </div>
+        <div class="col-5 p-2 card ml-5">
+            <div class="card-body">
+                <p class="text-sm-start text-primary m-3" style="font-weight: bold;">Login</p>
+                
+                <p class="text-sm-start ml-3 text-secondary pr-3">
+                    If you already have an account, please click the Login bellow.
+                </p>
+                <div class="form-group ml-3 pr-3">
+                    <button class="btn btn-primary btn-block ">Login</button>
+                </div>
+
+                <br>
+                <p class="text-sm-start text-success m-3" style="font-weight: bolder;">Guest Checkout</p>
+                <p class="text-sm-start ml-3 text-secondary">
+                    You can check out without creating an account. You will have a chance to create an account later.
+                </p>
+
+                <form #regForm="ngForm" (ngSubmit)="AddGuestMember()">
+                    <div class="form-group ml-3 pr-3">
+                        <input required [(ngModel)]="guestEmail" name="guestEmail" class="form-control" placeholder="Please enter your e-mail address">
+                    </div>
+                </form>
+
+                <div class="form-group ml-3 pr-3">
+                    <button class="btn btn-warning text-white btn-block " (click)="AddGuestMember()">Checkout as Guest</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 offset-1"></div>
+    </div>
+    
+</div>

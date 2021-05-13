@@ -1,0 +1,82 @@
+<div class="container">
+    
+    <h3 class="text-center p-4">Welcome to User Login</h3>
+    <div class="row">
+        <div class="col-6 p-2 card ">
+            <div class="card-body">
+                <p class="text-sm-start text-primary m-3" style="font-weight: bold;">Login</p>
+                
+                <p class="text-sm-start ml-3 text-secondary">
+                    If you have an account with us, please login.
+                </p>
+
+                <!-- Login Form -->
+
+                <form #loginForm="ngForm" class="ml-3 pr-3" (ngSubmit)="Login()" autocomplete="off" >
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input 
+                        type="email" 
+                        class="form-control" 
+                        name="email" 
+                        [(ngModel)]="model.username"
+                        placeholder="Please enter e-mail address">  
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input 
+                        type="password" 
+                        class="form-control" 
+                        name="password" 
+                        [(ngModel)]="model.password"
+                        placeholder="Please Enter password">
+                    </div>
+                    <div class="mb-3 form-check container">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="checkbox" class="form-check-input" id="checkRem">
+                                <label class="form-check-label" for="checkRem">Remember Password</label>
+                            </div>
+    
+                            <div class="col-6 d-flex justify-content-end">
+                                <a class="text-info">Forgot Password?</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mb-3">Login</button>
+                </form>
+                <!-- Login Form -->
+
+            </div>
+        </div>
+        <div class="col-5 p-2 card ml-5">
+            <div class="card-body">
+                <p class="text-sm-start text-primary m-3" style="font-weight: bold;">Register</p>
+                
+                <p class="text-sm-start ml-3 text-secondary pr-3">
+                    Create an account to receive emails about your orders, access your existing account preferences and track orders...
+                </p>
+                <div class="form-group ml-3 pr-3">
+                    <button class="btn btn-primary btn-block ">Register</button>
+                </div>
+
+                <p class="text-sm-start text-success m-3" style="font-weight: bolder;">Guest Checkout</p>
+                <p class="text-sm-start ml-3 text-secondary">
+                    You can check out without creating an account. You will have a chance to create an account later.
+                </p>
+
+                <div class="form-group ml-3 pr-3">
+                    <input type="text" class="form-control" placeholder="Please enter your e-mail address">
+                </div>
+
+                <div class="form-group ml-3 pr-3">
+                    <button class="btn btn-success btn-block ">Checkout as Guest</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 offset-1"></div>
+    </div>
+    
+</div>

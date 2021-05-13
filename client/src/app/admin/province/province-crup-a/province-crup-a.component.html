@@ -1,0 +1,20 @@
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Province Name: </label>
+    <div class="col-sm-6">
+        <ng-container *ngIf="forInsert">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="provincename"
+                [(ngModel)]="provincename"
+                placeholder="Enter province Name">
+        </ng-container>
+        <ng-container *ngIf="!forInsert">
+            <label class="text-muted font-weight-bolder"></label>
+        </ng-container>
+    </div>
+    <div class="col-sm-3">
+        <i class="fa fa-save navlinker text-primary navLinker" (click)="crup()"></i>
+        <i class="fa fa-times navlinker text-danger ml-3 navLinker" (click)="cancelEventFromChild()"></i>
+    </div>
+</div>
