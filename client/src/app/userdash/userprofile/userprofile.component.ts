@@ -26,7 +26,7 @@ export class UserprofileComponent implements OnInit {
   cityName;
 
   userDetails: UserUpdateSend  = {
-    userName:"admin",
+    userName:"",
     firstName: "",
     lastName: "",
     dateOfBirth: "",

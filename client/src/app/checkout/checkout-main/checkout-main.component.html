@@ -28,7 +28,7 @@
                                 <input [required] type="text" name="emailAddress" class="form-control" [(ngModel)]="model.emailAddress" placeholder="Enter Email Address">
                             </div>
                             <div class="col-sm-6">
-                                <input [required] type="number" name="phoneNumber" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Enter PhoneNumber Number">
+                                <input type="text" [required] name="phoneNumber" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Enter Phone Number">
                             </div>
                             
                             <div class="col-sm-12 mb-2">
@@ -61,7 +61,7 @@
                                 <button [disabled]="openPayment" class="btn btn-secondary btn-block" type="reset">Reset</button>    
                             </div>
                             <div class="col-sm-6 mb-2">
-                                <button [disabled]="openPayment"  class="btn btn-primary btn-block" type="submit">Submit</button>    
+                                <button [disabled]="openPayment"  class="btn btn-primary btn-block" type="submit">Confirm Shipping Details</button>    
                             </div>
                         </div>
                     </form>

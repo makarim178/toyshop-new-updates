@@ -117,31 +117,28 @@ namespace API.Controllers
 
             var appUser = await _userRepository.GetUserByIdAsync(orders.AppUserId);
 
+            var orderDetails = orders.OrderDetails;
+
+            //orders.OrderDetails = null;
+
+            foreach (var od in orderDetails)
+            {
+                var pdid = od.ProductId;
+                var product = await _productRepository.GetProductById(pdid);
+                
+            }
             
 
-            // var cd = new ContactDetail 
-            // {
-            //     Street = orders.ContactDetail.Street,
-            //     City = orders.ContactDetail.City,
-            //     PostalCode = orders.ContactDetail.PhoneNumber,
-            //     Province = orders.ContactDetail.Province,
-            //     Country = orders.ContactDetail.Country,
-            //     EmailAddress = orders.ContactDetail.EmailAddress,
-            //     PhoneNumber = orders.ContactDetail.PhoneNumber
-            // };
-
-            //Console.WriteLine(orders);
-
-            // contactDetails:
-            //     city: "Brampton"
-            //     country: "Canada"
-            //     emailAddress: "makarim178@gmail.com"
-            //     phoneNumber: 19055985580
-            //     postalcode: "L6Y 6G"
-            //     province: "Ontario"
-            //     street: "35 brushwood dr"
-            // orderStatus: "Order Confirmed"
-            // userType: "App User"
+            var cd = new ContactDetail 
+            {
+                Street = orders.ContactDetail.Street,
+                City = orders.ContactDetail.City,
+                PostalCode = orders.ContactDetail.PhoneNumber,
+                Province = orders.ContactDetail.Province,
+                Country = orders.ContactDetail.Country,
+                EmailAddress = orders.ContactDetail.EmailAddress,
+                PhoneNumber = orders.ContactDetail.PhoneNumber
+            };
 
             orders.CreatedDate = DateTime.Now;
             orders.LastUpdated = DateTime.Now;
@@ -150,9 +147,16 @@ namespace API.Controllers
 
             orders.AppUser = appUser;
 
-            // orders.ContactDetail = cd;
-            // if (await _ordersRepository.SaveAllAsync()) {
-            //     return orders;
+            orders.ContactDetail = cd;
+            if (await _ordersRepository.SaveAllAsync()) {
+                return orders;
+            }
+
+            // foreach (var od in orderDetails)
+            // {
+            //     OrderDetails odd = new OrderDetails{
+
+            //     }
             // }
 
             return orders;
@@ -189,6 +193,7 @@ namespace API.Controllers
             foreach (var item in order.OrderDetails)
             {
                 var product = await _productRepository.GetProductById(item.ProductId);
+                //Console.WriteLine("###############################" + item.ProductId);
                 OrderDetailsDto o = new OrderDetailsDto{
                     Id = item.Id,
                     Product = product,

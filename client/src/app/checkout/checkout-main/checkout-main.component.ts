@@ -1,8 +1,9 @@
-import { HttpEventType } from '@angular/common/http';
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ContactDetail } from 'src/app/_models/contactDetail';
+import { UserUpdateSend } from 'src/app/_models/userUpdateSend';
+import { AccountService } from 'src/app/_services/account.service';
 import { CartService } from 'src/app/_services/cart.service';
 import { CityService } from 'src/app/_services/city.service';
 import { CountryService } from 'src/app/_services/country.service';
@@ -26,8 +27,27 @@ export class CheckoutMainComponent implements OnInit {
     city: "0"
   }
 
+  userDetails: UserUpdateSend  = {
+    userName:"",
+    firstName: "",
+    lastName: "",
+    dateOfBirth: "",
+    contactDetail: {
+      id: "",
+      street: "",
+      city: "",
+      postalCode: "",
+      province: "",
+      country: "",
+      emailAddress: "",
+      phoneNumber: ""
+    }
+  }; 
+
   orderSuccess: false;
   openPayment = false;
+
+  orderDetails:any = [];
 
 
   SubTotal = 0;
@@ -37,11 +57,62 @@ export class CheckoutMainComponent implements OnInit {
 
   constructor(public cartService: CartService, private orderService: OrderService, private toastr: ToastrService
     , private cityService: CityService, private provinceService: ProvinceService, private countryService: CountryService
-    , private route: Router) { }
+    , private route: Router, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loadDrpDwns();
     this.loadCart();
+    this.loadUserDetails();
+  }
+
+  loadUserDetails () {
+
+    if(localStorage.getItem('user')) {
+
+      var userId = JSON.parse(localStorage.getItem('user')).id;
+      
+      this.accountService.getUserDetail(userId).subscribe(user => {
+        //console.log(user);
+
+        // this.cityName = user.contactDetail.city ;
+        // this.countryName = user.contactDetail.country;
+        // this.provinceName = user.contactDetail.province;
+
+        this.model.firstName = user.firstName;
+        this.model.lastName = user.lastName;
+        this.model.phoneNumber= user.contactDetail.phoneNumber;
+        this.model.emailAddress= user.contactDetail.emailAddress;
+        this.model.street= user.contactDetail.street;
+        this.model.postalCode= user.contactDetail.postalCode;
+        this.selectedDrpDowns.city= user.contactDetail.city;
+        this.selectedDrpDowns.provice= user.contactDetail.province;
+        this.selectedDrpDowns.country= user.contactDetail.country;
+        //console.log(this.model.phoneNumber);
+        
+        
+
+        const contactDetail: ContactDetail = {
+          id: (user.contactDetail) ? user.contactDetail.id : 0,
+          street: (user.contactDetail) ? user.contactDetail.street : "",
+          city: (user.contactDetail) ? user.contactDetail.city : "",
+          postalCode: (user.contactDetail) ? user.contactDetail.postalCode : "",
+          province: (user.contactDetail) ? user.contactDetail.province : "",
+          country: (user.contactDetail) ? user.contactDetail.country : "",
+          emailAddress: (user.contactDetail) ? user.contactDetail.emailAddress : "",
+          phoneNumber: (user.contactDetail) ? user.contactDetail.phoneNumber : ""
+        };
+
+        this.userDetails  = {
+          userName:user.username,
+          firstName: (user.firstName) ? user.firstName : "",
+          lastName: (user.lastName) ? user.lastName : "",
+          dateOfBirth: "",
+          contactDetail: contactDetail
+        };         
+      })
+
+    }
+
   }
 
   loadCart() {
@@ -104,23 +175,40 @@ export class CheckoutMainComponent implements OnInit {
         emailAddress: this.model.emailAddress,
         phoneNumber: this.model.phoneNumber
       }
+      
+
+
+      this.cart.forEach(item => {
+        const orderDetails = {
+          productId: item.id,
+          cartQty: item.cartQty,
+          productPrice: item.productPrice
+        }
+        this.orderDetails.push(orderDetails);
+      });
   
       const order = {
-        userType: this.model.userType,
-        contactDetails: contactDetails,
+        usertype: this.model.userType,
+        appUserId: 0,
+        orderDetails: this.orderDetails,
+        contactDetail: contactDetails,
         orderStatus: "Order Confirmed"
       }
 
-      console.log(order);
+      if(this.userDetails.userName != "") {
+        order.appUserId = JSON.parse(localStorage.getItem('user')).id;
+      }
+
+      
       
       
       try {
-        // this.orderService.saveOrder(order).subscribe(response => {
-        //   //console.log(response);
-        //   this.makeOrderDetails(response);
-        //   this.cartService.cartEmpty();
-        //   this.route.navigateByUrl('/orderConfirm');
-        // });
+        this.orderService.saveOrder(order).subscribe(response => {
+          //console.log(response);
+          //this.makeOrderDetails(response);
+          this.cartService.cartEmpty();
+          this.route.navigateByUrl('/orderConfirm');
+        });
         
       } catch (error) {
         this.toastr.error(error);
