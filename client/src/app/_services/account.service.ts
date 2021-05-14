@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserUpdateSend } from '../_models/userUpdateSend';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,14 @@ export class AccountService {
         // return user;
       }
     }));
+  }
+
+  getUserDetail(id) {
+    return this.http.get<any>(this.baseUrl + `users/${id}`);
+  }
+
+  updateUser(userDetail: UserUpdateSend) {
+    return this.http.put(this.baseUrl + `users/user`, userDetail);
   }
 
   setCurrentUser(user: User) {

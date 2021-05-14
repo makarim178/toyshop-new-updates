@@ -14,7 +14,7 @@ namespace API.Entity
         public string LastName { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-        public ContactDetail ContactDetail { get; set; }
+        public int ContactDetailId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastActive { get; set; }
 

@@ -1,1 +1,174 @@
-<p>userprofile works!</p>
+<div class="container">
+    <div class="row" >
+        
+        <h5>
+            User Profile
+        </h5>
+
+        <div class="card">
+            <div class="card-body">
+                <input  
+                    type="text"
+                    class="form-control"
+                    name="userName"
+                    [(ngModel)]="userDetails.userName"
+                    hidden
+                >
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name: </label>
+                    <input  
+                        type="text"
+                        class="form-control"
+                        name="firstName"
+                        [(ngModel)]="userDetails.firstName"
+                        placeholder="Please Enter your First Name"
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name: </label>
+                    <input  
+                        type="text"
+                        class="form-control"
+                        name="lastName"
+                        [(ngModel)]="userDetails.lastName"
+                        placeholder="Please Enter your First Name"
+                    >
+                </div>
+
+                <ng-container *ngIf="showDob">
+                    <input type="text" name="dateOfBirth" hidden [(ngModel)]="userDetails.dateOfBirth">
+                    <div class="row">
+                        <span>Date of Birth: </span>
+                        <div class="col col-sm-4">
+                            <label for="year" class="form-label">Year:</label>
+                            <select name="year" id="year" class="form-control" [(ngModel)]="dob.year">
+                                <option *ngFor="let yr of year" [value]="yr.val">{{yr.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col col-sm-4">
+                            <label for="month" class="form-label">Month:</label>
+                            <select name="month" id="month" class="form-control" [(ngModel)]="dob.month">
+                                <option *ngFor="let m of month" [value]="m.value">{{m.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col col-sm-4">
+                            <label for="day" class="form-label">Day:</label>
+                            <select name="day" id="day" class="form-control" [(ngModel)]="dob.day">
+                                <option *ngFor="let d of day" [value]="d">{{d}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </ng-container>
+
+                
+            </div>
+        </div>
+    </div>
+                
+                
+    <h5>Contact Details</h5>
+        <div class="card">
+            <div class="card-body">
+                <input  
+                    type="text"
+                    class="form-control"
+                    name="contactDetailId"
+                    [(ngModel)]="userDetails.contactDetail.id"
+                    hidden
+                >
+                <div class="row">
+
+                            
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="street" class="form-label">Street: </label>
+                            <input  
+                                type="text"
+                                class="form-control"
+                                name="street"
+                                [(ngModel)]="userDetails.contactDetail.street"
+                                placeholder="Please Enter Street"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="postalCode" class="form-label">Postal Code: </label>
+                            <input  
+                                type="text"
+                                class="form-control"
+                                name="postalCode"
+                                [(ngModel)]="userDetails.contactDetail.postalCode"
+                                placeholder="Please Enter Postal Code"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country: </label>
+                            <select name="country" id="country" class="form-control" [(ngModel)]="countryName">
+                                <option *ngFor="let country of countries" [value]="country.countryname">{{country.countryname}}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Phone Number: </label>
+                            <input  
+                                type="text"
+                                class="form-control"
+                                name="phoneNumber"
+                                [(ngModel)]="userDetails.contactDetail.phoneNumber"
+                                placeholder="Please Enter Phone Number"
+                            >
+                        </div>
+
+                    </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label for="city" class="form-label">City: </label>
+                                    <select
+                                        name="cityName"
+                                        id="cityName"
+                                        class="form-control"
+                                        [(ngModel)]="cityName"
+                                    >
+                                        <option *ngFor="let city of cities" 
+                                            [value]="city.cityname">
+                                            {{city.cityname}}
+                                        </option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="province" class="form-label">Province </label>
+                                    <select name="province" id="province" class="form-control" [(ngModel)]="provinceName">
+                                        <option *ngFor="let province of provinces" [value]="province.provincename">{{province.provincename}}</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="emailAddress" class="form-label">E-mail: </label>
+                                    <input  
+                                        type="text"
+                                        class="form-control"
+                                        name="emailAddress"
+                                        [(ngModel)]="userDetails.contactDetail.emailAddress"
+                                        placeholder="Please Enter Email Address"
+                                    >
+                                </div>
+                                
+        
+                                <div class="mt-5 ">
+                                    <button class="btn btn-success " (click)="UpdateUp()">Update</button>
+                                </div>
+        
+                                
+                
+                                        
+                                    </div>
+                                </div>
+                                </div>
+                
+                
+                            </div>
+
+    
+</div>

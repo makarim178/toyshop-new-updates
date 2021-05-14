@@ -50,7 +50,6 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { UserPanelComponent } from './admin/user-panel/user-panel.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +91,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     UserManagementComponent,
     UserPanelComponent,
     RolesModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -101,7 +101,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     FormsModule,
     SharedModule,
     NgxSpinnerModule,
-    NgxBraintreeModule
+    NgxBraintreeModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true},

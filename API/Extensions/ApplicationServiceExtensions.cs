@@ -26,12 +26,12 @@ namespace API.Extensions
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IContactDetailRepository, ContactDetailRepository>();
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
-
             return services;
         }
     }

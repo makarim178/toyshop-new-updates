@@ -34,6 +34,7 @@ export class ProductListUComponent implements OnInit {
     OrderBy: "low"
   };
   recAge:number=0;
+  
   //products$: Observable<Product[]>;
 
   constructor(private productService: ProductService, private toastr: ToastrService, private cartService: CartService, private brandService: BrandService, private catService: CategoryService) { }

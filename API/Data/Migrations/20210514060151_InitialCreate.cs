@@ -172,7 +172,7 @@ namespace API.Data.Migrations
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ContactDetailId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ContactDetailId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     LastActive = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -198,7 +198,7 @@ namespace API.Data.Migrations
                         column: x => x.ContactDetailId,
                         principalTable: "ContactDetail",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

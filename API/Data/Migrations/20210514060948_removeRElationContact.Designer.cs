@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210513014652_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210514060948_removeRElationContact")]
+    partial class removeRElationContact
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace API.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ContactDetailId")
+                    b.Property<int>("ContactDetailId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDate")
@@ -117,8 +117,6 @@ namespace API.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContactDetailId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -465,15 +463,6 @@ namespace API.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("API.Entity.AppUser", b =>
-                {
-                    b.HasOne("API.Entity.ContactDetail", "ContactDetail")
-                        .WithMany()
-                        .HasForeignKey("ContactDetailId");
-
-                    b.Navigation("ContactDetail");
                 });
 
             modelBuilder.Entity("API.Entity.AppUserRole", b =>

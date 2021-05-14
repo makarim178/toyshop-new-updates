@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 import { ToastrModule } from 'ngx-toastr';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { TabsModule } from "ngx-bootstrap/tabs";
@@ -22,7 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     FileUploadModule,
     PaginationModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -31,7 +32,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule,
     FileUploadModule,
     PaginationModule,
-    ModalModule
+    ModalModule,
   ]
 })
 export class SharedModule { }

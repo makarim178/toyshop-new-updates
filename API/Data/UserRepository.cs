@@ -16,17 +16,17 @@ namespace API.Data
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
-            return await _context.Users.Include(c => c.ContactDetail).SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Users.SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<AppUser> GetUserByUsername(string username)
         {
-            return await _context.Users.Include(c => c.ContactDetail).SingleOrDefaultAsync(x => x.UserName == username);
+            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            return await _context.Users.Include(c => c.ContactDetail).ToListAsync();
+            return await _context.Users.ToListAsync();
         }
         public async Task<bool> SaveAllAsync()
         {
