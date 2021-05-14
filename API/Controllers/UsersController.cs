@@ -25,6 +25,13 @@ namespace API.Controllers
 
         }
 
+        [HttpGet("contactDetails/{id}")]
+        public async Task<ContactDetail> GetCotactDetail(int id) {
+
+            ContactDetail contactDetail = await _cdRepository.GetByContactDetailId(id);
+            return contactDetail;
+        }
+
         [HttpPut("user")]
         public async Task<ActionResult> UpdateUser(UserUpdateRecData userUpdateRecData)
         {
@@ -54,7 +61,22 @@ namespace API.Controllers
                 await _cdRepository.Save(cd);
                 userDto.ContactDetailId = cd.Id;
                 
-            }                 
+            } else 
+            {
+                var cdId = userUpdateRecData.ContactDetailId;
+                var upCd = await _cdRepository.GetByContactDetailId(cdId);
+
+                    upCd.Street = contactDetail.Street;
+                    upCd.City = contactDetail.City;
+                    upCd.PostalCode = contactDetail.PostalCode;
+                    upCd.Province = contactDetail.Province;
+                    upCd.Country = contactDetail.Country;
+                    upCd.EmailAddress = contactDetail.EmailAddress;
+                    upCd.PhoneNumber = contactDetail.PhoneNumber;
+
+                    _cdRepository.Update(upCd);
+                    await _cdRepository.SaveAllAsync();
+            }      
 
             _mapper.Map(userDto, user);
 

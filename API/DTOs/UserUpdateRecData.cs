@@ -10,6 +10,8 @@ namespace API.DTOs
         public string LastName { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+        public int ContactDetailId { get; set; }
         public ContactDetail ContactDetail { get; set; }
     }
 }

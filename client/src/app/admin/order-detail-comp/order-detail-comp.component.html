@@ -1,0 +1,6 @@
+<div class="image m-2 p-4 border" *ngIf="product" >
+    <img src="{{product.photoUrl || '../../../assets/user.png'}}" style="width:100px" >
+    <p >Product: {{product.productName}} </p>
+    <p>Order Qty: {{orderDetails.cartQty}} </p>
+    <p>Product Price: {{orderDetails.productPrice | currency : "CAD"}} </p>
+</div>

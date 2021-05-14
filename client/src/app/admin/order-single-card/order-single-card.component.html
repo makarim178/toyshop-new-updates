@@ -1,0 +1,27 @@
+<div class="card m-1">
+    <div class="cardBody">
+        <div class="title">
+            <span>Order Id: {{order.id}}</span>
+        </div>
+
+        <div class="delAddress">
+            <div class="row">
+                <div class="col" *ngFor="let item of order.orderDetails">
+
+                    <app-order-detail-comp [orderDetails]="item"></app-order-detail-comp>
+
+                </div>
+                <div class="col">
+                    <p>Delivery Address: </p>
+                    <p>street: {{contactDetails.street}}, {{contactDetails.city}} </p>
+                    <p>{{contactDetails.province}}, {{contactDetails.postalCode}}, {{contactDetails.country}} </p>                    
+                </div>
+            </div>
+        </div>
+        <select name="status" class="form-control" [(ngModel)]="selectedStatus">
+            <option value="0">Please Select Status</option>
+            <option *ngFor="let item of status" [value]="item.value">{{item.value}}</option>
+        </select>
+        <button class="btn btn-info"(click)="updateOrderStatus(order.id)" >Update</button>
+    </div>
+</div>

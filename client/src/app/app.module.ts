@@ -49,6 +49,10 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { UserPanelComponent } from './admin/user-panel/user-panel.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { OrderListComponent } from './admin/order-list/order-list.component';
+import { OrderSingleCardComponent } from './admin/order-single-card/order-single-card.component';
+import { OrderDetailCompComponent } from './admin/order-detail-comp/order-detail-comp.component';
+import { OrderStatusCheckComponent } from './order-status-check/order-status-check.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +95,10 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     UserManagementComponent,
     UserPanelComponent,
     RolesModalComponent,
+    OrderListComponent,
+    OrderSingleCardComponent,
+    OrderDetailCompComponent,
+    OrderStatusCheckComponent,
     
   ],
   imports: [

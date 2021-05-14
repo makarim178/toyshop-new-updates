@@ -29,7 +29,7 @@ namespace API.Data
         public async Task<IEnumerable<OrderDetails>> GetByOrderId(int orderId)
         {
             IEnumerable<OrderDetails> od = new List<OrderDetails>();
-            od = await _context.OrderDetails.ToListAsync();
+            od = await _context.OrderDetails.Where(x => x.OrdersId == orderId).ToListAsync();
             //return await _context.OrderDetails.Where(x=>x.OrdersId == orderId).ToListAsync();
             return od;
         }

@@ -56,6 +56,8 @@ namespace API.Controllers
             }
         }
 
+        
+
         [HttpGet("getclienttoken")]
         public ActionResult<ClientToken> GetToken()
         {
@@ -176,10 +178,63 @@ namespace API.Controllers
             return Ok(await _orderDetailRepository.GetByOrderId(orderid));
         }
 
+        [HttpPut]
+        public async Task<ActionResult> UpdateOrder (OrdersDto orderStatus)
+        {
+            var status = orderStatus.OrderStatus;
+            var Id = orderStatus.Id;
+
+            var order = await _ordersRepository.GetById(Id);
+            order.OrderStatus = status;
+
+            _ordersRepository.Update(order);
+            if(await _ordersRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed To Update Order");
+        }
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrdersDto>>> GetOrders()
         {
+            var ordersCollection = await _orderDetailRepository.GetAll();
+
+
+            // IEnumerable<OrdersDto> numOrder = new List<OrdersDto>();
+            // IEnumerable<OrderDetails> numOrdDet = new List<OrderDetails>();
+            
+
+            // foreach (var order in ordersCollection)
+            // {
+            //     var orderId = order.Id;
+            //     var od = await _orderDetailRepository.GetByOrderId(orderId);
+
+            //     numOrdDet.Add();
+                
+            // }
+
+                // IEnumerable<OrderDetailsDto> listOrderDetails = new List<OrderDetailsDto>();
+                // foreach (var d in od)
+                // {
+                //     var prod = await _productRepository.GetProductById(d.ProductId);
+                //     OrderDetailsDto newOdd = new OrderDetailsDto {
+                //         Id = d.Id,
+                //         OrdersId = d.OrdersId,
+                //         ProductId = d.ProductId,
+                //         Product = prod,
+                //         CartQty = d.CartQty,
+                //         ProductPrice = d.productPrice
+                //     };
+                //     listOrderDetails.Add(newOdd);
+                // }
+            
+
             return Ok(await _ordersRepository.GetAll());
+        }
+
+        [HttpGet("byUser/{id}")]
+        public async Task<IEnumerable<Orders>> GetOrdersByUser(int id) 
+        {
+            return (IEnumerable<Orders>)await _ordersRepository.GetByUserId(id);
         }
 
         [HttpGet("{id}", Name = "GetordersById")]

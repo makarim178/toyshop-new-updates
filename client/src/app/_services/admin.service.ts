@@ -18,4 +18,16 @@ export class AdminService {
   updateUserRoles(username: string, roles: string[]) {
     return this.http.post(this.baseUrl + `admin/edit-roles/${username}?roles=${roles}`, {});
   }
+
+  getOrders() {
+    return this.http.get(this.baseUrl + 'orders');
+  }
+
+  getContactDetails(id:any) {
+    return this.http.get(this.baseUrl + `users/contactDetails/${id}`);
+  }
+
+  updateOrder(order) {
+    return this.http.put(this.baseUrl + 'orders', order);
+  }
 }

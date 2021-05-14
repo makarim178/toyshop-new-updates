@@ -1,0 +1,9 @@
+<div class="container">
+    <h5>Orders</h5>
+
+    <div class="row">
+        <div class="card" *ngFor="let order of orders">
+            <app-order-single-card [order]="order" (editEmitter)="updateOrderStatus($event)"></app-order-single-card>
+        </div>
+    </div>
+</div>

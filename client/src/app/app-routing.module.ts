@@ -4,6 +4,7 @@ import { BrandMainAComponent } from './admin/brand/brand-main-a/brand-main-a.com
 import { CatMainAComponent } from './admin/category/cat-main-a/cat-main-a.component';
 import { CityMainAComponent } from './admin/city/city-main-a/city-main-a.component';
 import { CountryMainAComponent } from './admin/country/country-main-a/country-main-a.component';
+import { OrderListComponent } from './admin/order-list/order-list.component';
 import { ProdCrudAComponent } from './admin/product/prod-crud-a/prod-crud-a.component';
 import { ProdMainAComponent } from './admin/product/prod-main-a/prod-main-a.component';
 import { ProvinceMainAComponent } from './admin/province/province-main-a/province-main-a.component';
@@ -31,14 +32,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'user', component: UserprofileComponent},
-      {path: 'brand', component: BrandMainAComponent},
-      {path: 'category', component: CatMainAComponent},
-      {path: 'city', component: CityMainAComponent},
-      {path: 'country', component: CountryMainAComponent},
-      {path: 'province', component: ProvinceMainAComponent},
+      {path: 'brand', component: BrandMainAComponent, canActivate: [AdminGuard]},
+      {path: 'category', component: CatMainAComponent, canActivate: [AdminGuard]},
+      {path: 'city', component: CityMainAComponent, canActivate: [AdminGuard]},
+      {path: 'country', component: CountryMainAComponent, canActivate: [AdminGuard]},
+      {path: 'province', component: ProvinceMainAComponent, canActivate: [AdminGuard]},
       {path: 'prod', component: ProdMainAComponent, canActivate: [AdminGuard]},
-      {path: 'user-management', component: UserPanelComponent, canActivate: [AdminGuard]},
+      {path: 'user-management', component: UserPanelComponent},
       {path: 'prod/:id', component: ProdCrudAComponent, canDeactivate: [PreventUnsavedChangesGuard], canActivate: [AdminGuard]},
+      {path: 'order-management', component: OrderListComponent, canActivate: [AdminGuard]}
       // {path: 'product', component:},
     ]
   },

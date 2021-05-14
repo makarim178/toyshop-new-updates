@@ -51,17 +51,17 @@
                     </a>
     
                     <div class="dropdown-menu" *dropdownMenu>
-                        <a class="dropdown-item" routerLink="/brand">Brand</a>
-                        <a class="dropdown-item" routerLink="/category">Category</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" routerLink="/city">City</a>
-                        <a class="dropdown-item" routerLink="/province">Province</a>
-                        <a class="dropdown-item" routerLink="/country">Country</a>
+                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/brand">Brand</a>
+                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/category">Category</a>
+                        <div *appHasRole='["Admin", "Moderator"]' class="dropdown-divider"></div>
+                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/city">City</a>
+                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/province">Province</a>
+                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/country">Country</a>
                         <div class="dropdown-divider"></div>
                         <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/prod" >Product</a> 
-                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/user-management" >user-management</a> 
+                        <a class="dropdown-item" routerLink="/user-management" >user-profile</a> 
+                        <a *appHasRole='["Admin", "Moderator"]' class="dropdown-item" routerLink="/order-management" >Order Management</a> 
 
-                        <a class="dropdown-item" routerLink="/user" >Edit Profile</a>
                         <a class="dropdown-item" (click)="Logout()" >Logout</a>
                     </div>
                 </div>

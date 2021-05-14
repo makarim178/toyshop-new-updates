@@ -13,5 +13,6 @@ namespace API.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<OrdersDto>> GetAll();
         Task<Orders> GetById(int id);
+        Task<IEnumerable<Orders>> GetByUserId(int id);
     }
 }

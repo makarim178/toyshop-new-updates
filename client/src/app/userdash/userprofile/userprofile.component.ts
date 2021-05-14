@@ -124,18 +124,18 @@ export class UserprofileComponent implements OnInit {
       this.accountService.getUserDetail(userId).subscribe(user => {
         console.log(user);
 
-        this.cityName = user.contactDetail.city ;
-        this.countryName = user.contactDetail.country;
-        this.provinceName = user.contactDetail.province;
+        // this.cityName = (user.contactDetail) ? user.contactDetail.city : "Please Select City" ;
+        // this.countryName = (user.contactDetail.country !== "" && user.contactDetail.country !== null) ? user.contactDetail.country : "Canada";
+        // this.provinceName = (user.contactDetail.province !== "" && user.contactDetail.province !== null)  ? user.contactDetail.province : "Ontario";
         
 
         const contactDetail: ContactDetail = {
           id: (user.contactDetail) ? user.contactDetail.id : 0,
           street: (user.contactDetail) ? user.contactDetail.street : "",
-          city: (user.contactDetail) ? user.contactDetail.city : "",
+          city: (user.contactDetail) ? this.cityName: "",
           postalCode: (user.contactDetail) ? user.contactDetail.postalCode : "",
-          province: (user.contactDetail) ? user.contactDetail.province : "",
-          country: (user.contactDetail) ? user.contactDetail.country : "",
+          province: (user.contactDetail) ? this.provinceName : "",
+          country: (user.contactDetail) ? this.countryName : "",
           emailAddress: (user.contactDetail) ? user.contactDetail.emailAddress : "",
           phoneNumber: (user.contactDetail) ? user.contactDetail.phoneNumber : ""
         };
@@ -201,10 +201,18 @@ export class UserprofileComponent implements OnInit {
 
   UpdateUp() {
     if(this.userDetails.firstName !== "" && this.userDetails.lastName !== "" && this.userDetails.contactDetail.street !== "" 
-      && this.userDetails.contactDetail.city !== "" && this.userDetails.contactDetail.province !== "" && this.userDetails.contactDetail.postalCode !== "" 
-      && this.userDetails.contactDetail.country !== "" && this.userDetails.contactDetail.emailAddress !== "" && this.userDetails.contactDetail.phoneNumber !== "" 
+      && this.cityName!== "" && this.provinceName !== "" && this.userDetails.contactDetail.postalCode !== "" 
+      && this.countryName !== "" && this.userDetails.contactDetail.emailAddress !== "" && this.userDetails.contactDetail.phoneNumber !== "" 
     )
     {
+
+      this.userDetails.contactDetail.city = this.cityName;
+      this.userDetails.contactDetail.country = this.countryName;
+      this.userDetails.contactDetail.province = this.provinceName;
+
+      //console.log(this.userDetails.contactDetail.province );
+      
+
       this.accountService.updateUser(this.userDetails).subscribe(() => {
         this.toastr.success("Updated Successfully!");
         this.loadUserDetails();

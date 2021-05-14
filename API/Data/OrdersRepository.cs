@@ -50,6 +50,16 @@ namespace API.Data
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<Orders>> GetByUserId(int id)
+        {
+            return await _context.Orders
+                .Where(x => x.AppUserId == id)
+                .Include(c => c.ContactDetail)
+                .Include(a => a.AppUser)
+                .Include(o => o.OrderDetails)
+                .ToListAsync();
+        }
+
         public void Remove(Orders orders)
         {
             _context.Orders.Remove(orders);
@@ -71,5 +81,6 @@ namespace API.Data
         {
             _context.Entry(orders).State = EntityState.Modified;
         }
+
     }
 }
