@@ -20,10 +20,10 @@ export class ProductService {
 
   getProducts(prodParams: ProdParams) {
 
-    var response = this.productCache.get(Object.values(prodParams).join('-'));
-    if(response) {
-      return of(response);
-    }
+    // var response = this.productCache.get(Object.values(prodParams).join('-'));
+    // if(response) {
+    //   return of(response);
+    // }
     
     let params = this.getPainationHeaders(prodParams.pageNumber, prodParams.pageSize);
 
@@ -46,7 +46,11 @@ export class ProductService {
   }
 
   private getPaginatedResult<T>(url, params) {
+    
     const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
+    console.log(url);
+    console.log(params);
+    
     return this.http.get<T>(url, { observe: 'response', params }).pipe(
       map(response => {
         paginatedResult.result = response.body;

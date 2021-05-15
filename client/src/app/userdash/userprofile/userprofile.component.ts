@@ -122,11 +122,9 @@ export class UserprofileComponent implements OnInit {
       var userId = JSON.parse(localStorage.getItem('user')).id;
       
       this.accountService.getUserDetail(userId).subscribe(user => {
-        console.log(user);
-
-        // this.cityName = (user.contactDetail) ? user.contactDetail.city : "Please Select City" ;
-        // this.countryName = (user.contactDetail.country !== "" && user.contactDetail.country !== null) ? user.contactDetail.country : "Canada";
-        // this.provinceName = (user.contactDetail.province !== "" && user.contactDetail.province !== null)  ? user.contactDetail.province : "Ontario";
+        if(user.contactDetail.city !== null && user.contactDetail.city !== undefined) this.cityName = user.contactDetail.city
+        if(user.contactDetail.country !== null && user.contactDetail.country !== undefined) this.countryName = user.contactDetail.country
+        if(user.contactDetail.province !== null && user.contactDetail.province !== undefined) this.provinceName = user.contactDetail.province
         
 
         const contactDetail: ContactDetail = {
@@ -155,7 +153,6 @@ export class UserprofileComponent implements OnInit {
 
   loadCity() {
     this.cityService.GetAll().subscribe(cities => {
-      console.log(cities);
       
       this.cities = cities;
     })
