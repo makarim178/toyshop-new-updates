@@ -48,8 +48,8 @@ export class ProductService {
   private getPaginatedResult<T>(url, params) {
     
     const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
-    console.log(url);
-    console.log(params);
+    // console.log(url);
+    // console.log(params);
     
     return this.http.get<T>(url, { observe: 'response', params }).pipe(
       map(response => {

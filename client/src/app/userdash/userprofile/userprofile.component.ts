@@ -25,11 +25,12 @@ export class UserprofileComponent implements OnInit {
   cities: any[] = [];
   cityName;
 
-  userDetails: UserUpdateSend  = {
+  userDetails: any  = {
     userName:"",
     firstName: "",
     lastName: "",
     dateOfBirth: "",
+    contactDetailId: "",
     contactDetail: {
       id: "",
       street: "",
@@ -122,6 +123,7 @@ export class UserprofileComponent implements OnInit {
       var userId = JSON.parse(localStorage.getItem('user')).id;
       
       this.accountService.getUserDetail(userId).subscribe(user => {
+        
         if(user.contactDetail.city !== null && user.contactDetail.city !== undefined) this.cityName = user.contactDetail.city
         if(user.contactDetail.country !== null && user.contactDetail.country !== undefined) this.countryName = user.contactDetail.country
         if(user.contactDetail.province !== null && user.contactDetail.province !== undefined) this.provinceName = user.contactDetail.province
@@ -143,6 +145,7 @@ export class UserprofileComponent implements OnInit {
           firstName: (user.firstName) ? user.firstName : "",
           lastName: (user.lastName) ? user.lastName : "",
           dateOfBirth: this.dob.year + "-"+ this.dob.month + "-" + this.dob.day,
+          contactDetailId: user.contactDetailId,
           contactDetail: contactDetail
         };         
       })
@@ -208,9 +211,28 @@ export class UserprofileComponent implements OnInit {
       this.userDetails.contactDetail.province = this.provinceName;
 
       //console.log(this.userDetails.contactDetail.province );
+      //contactDetailId;
+
+      const sendData = {
+        username: this.userDetails.userName,
+        dateOfBirth: this.userDetails.dateOfBirth,
+        firstName: this.userDetails.firstName,
+        lastName: this.userDetails.lastName,
+        contactDetailId: this.userDetails.contactDetailId,
+        contactDetail: {
+          city: this.userDetails.contactDetail.city,
+          country: this.userDetails.contactDetail.country,
+          emailAddress: this.userDetails.contactDetail.emailAddress,
+          id: this.userDetails.contactDetail.id,
+          phoneNumber: this.userDetails.contactDetail.phoneNumber,
+          postalCode: this.userDetails.contactDetail.postalCode,
+          province: this.userDetails.contactDetail.province,
+          street: this.userDetails.contactDetail.street,
+        }
+      }
       
 
-      this.accountService.updateUser(this.userDetails).subscribe(() => {
+      this.accountService.updateUser(sendData).subscribe(() => {
         this.toastr.success("Updated Successfully!");
         this.loadUserDetails();
       });

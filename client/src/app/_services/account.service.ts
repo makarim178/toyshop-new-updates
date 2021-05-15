@@ -45,7 +45,11 @@ export class AccountService {
     return this.http.get<any>(this.baseUrl + `users/${id}`);
   }
 
-  updateUser(userDetail: UserUpdateSend) {
+  updateUser(userDetail) {
+
+    
+    //console.log(userDetail);
+    
     return this.http.put(this.baseUrl + `users/user`, userDetail);
   }
 

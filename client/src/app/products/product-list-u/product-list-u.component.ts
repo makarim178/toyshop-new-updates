@@ -61,7 +61,7 @@ export class ProductListUComponent implements OnInit {
   loadProducts(){
     
     this.productService.getProducts(this.prodParams).subscribe(response => {
-      console.log(response.result);
+      //console.log(response.result);
       
       this.products = response.result;
       this.pagination = response.pagination;
